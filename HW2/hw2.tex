@@ -1,0 +1,352 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{mathtools}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Assignment\ \#2} % Assignment title
+\newcommand{\hmwkDueDate}{Wed,\ Jan.\ 29,\ 2014} % Due date
+\newcommand{\hmwkClass}{CSC\ 446} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Qiyuan Qiu} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+%\newpage
+%\tableofcontents
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}
+    %---------------------------------
+    \begin{homeworkSection}{(a)}
+    \problemAnswer{ % Answer
+    \begin{equation*}
+        \begin{split}
+        H(Y|X)  &= -\sum\limits_{x,y}p(x,y)logP(y|x) \\
+                &= -\sum\limits_{x,y}p(x,y)log\frac{P(x,y)}{P(x)} \\
+                &= -\sum\limits_{x,y}p(x,y)(logP(x,y) - logP(x)) \\
+                &= -\sum\limits_{x,y}p(x,y)logP(x,y) - -\sum\limits_{x,y}p(x,y)logP(x) \\
+                &= -\sum\limits_{x,y}p(x,y)logP(x,y) - -\sum\limits_{x}p(x)logP(x) \\
+                &= H(X,Y) - H(X)
+        \end{split}
+    \end{equation*}
+    Therefore:
+    $$H(X,Y) = H(X) + H(Y|X)$$
+    }
+    \end{homeworkSection}
+    %---------------------------------
+    \begin{homeworkSection}{(b)}
+    \problemAnswer{ % Answer
+    \begin{equation*}
+        \begin{split}
+            H(X) - H(X|Y)   &= -\sum\limits_{x}p(x)logP(x) + 
+                            \sum\limits_{x,y}p(x,y)log\frac{P(x,y)}{P(y)} \\
+                            &= \sum\limits_{x}p(x)log\frac{1}{P(x)} +
+                            \sum\limits_{x,y}p(x,y)log\frac{P(x,y)}{P(y)} \\
+                            &= \sum\limits_{x,y}p(x,y)log\frac{1}{P(x)} +
+                            \sum\limits_{x,y}p(x,y)log\frac{P(x,y)}{P(y)} \\
+                            &= \sum\limits_{x,y}p(x,y)log\frac{P(x,y)}{P(x)P(y)} \\ 
+                            &= I(X;Y)
+        \end{split}
+    \end{equation*}
+    Therefore:
+    $$I(X; Y) = H(X) - H(X|Y)$$
+    }
+    \end{homeworkSection}
+    %---------------------------------
+    \begin{homeworkSection}{(c)}
+    \problemAnswer{ % Answer
+        From (a) we know that 
+        \begin{equation}
+            \label{eq:1}
+        H(X,Y) = H(X) + H(Y|X)
+        \end{equation}
+        \begin{equation}
+            \label{eq:2}
+        H(Y,X) = H(Y) + H(X|Y)
+        \end{equation}
+        ~\eqref{eq:1} - ~\eqref{eq:2}, we have
+        $$0 = H(X) - H(Y) + H(Y|Z) - H(X|Y)$$
+        with a a little bit of rearrangement:
+        $$H(X) - H(X|Y) = H(Y) - H(Y|X)$$
+    }
+    \end{homeworkSection}
+    %---------------------------------
+    \begin{homeworkSection}{(d)}
+    \problemAnswer{ % Answer
+        From (a) we know
+        $$H(X,Y) = H(X) + H(Y|X)$$
+        \begin{equation*}
+        \begin{split}
+            H(X) + H(Y) &\ge H(X) + H(Y|X) \\
+            H(Y) &\ge H(Y|X) \\
+            I(Y;X) &\ge 0 \text{  which is always true} 
+        \end{split}
+        \end{equation*}
+        Therefore we have 
+        $$H(X) + H(Y) \ge H(X,Y)$$
+    }
+    \end{homeworkSection}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+
+    %---------------------------------
+    \begin{homeworkSection}{(a)}
+    \problemAnswer{ % Answer
+    $$L(\vec{x}, \lambda) =  \| \vec{x} \|^2  + \lambda(\sum\limits_i \vec{x} - 1)$$
+    which is equivalent to
+        \begin{equation}
+            \begin{cases}
+                &\frac{\partial L}{\partial \vec{x}} = 0 \\
+                &\sum \limits_i x_i - 1 = 0
+            \end{cases}
+        \end{equation}
+    which is equivalent to 
+        \begin{equation}
+            \begin{cases}
+                &\frac{\partial L}{\partial x_i} = 0 \\
+                &\sum \limits_i x_i - 1 = 0
+            \end{cases}
+        \end{equation}
+    which is equivalent to 
+        \begin{equation}
+            \begin{cases}
+                & x_i = \frac{- \lambda}{2} \\
+                &\sum \limits_i x_i - 1 = 0
+            \end{cases}
+        \end{equation}
+    Therefore 
+    \begin{equation}
+    \begin{cases}
+        & \lambda = \frac{-2}{n} \\
+        & x_i = \frac{1}{n}
+    \end{cases}
+    \end{equation}
+    }
+    \end{homeworkSection}
+
+%---------------------------------
+    \begin{homeworkSection}{(b)}
+    \problemAnswer{ % Answer
+        $$L(\vec{x}, \lambda) = \sum\limits_i x_i + 
+                \lambda\left(\sum\limits_i x_i^2 - 1\right)$$
+        which is equivalent to
+            \begin{equation}
+                \begin{cases}
+                    &\frac{\partial L}{\partial \vec{x}} = 0 \\
+                    &\sum \limits_i x_i^2 - 1 = 0
+                \end{cases}
+            \end{equation}
+        which is equivalent to
+            \begin{equation}
+                \label{eq:p2b}
+                \begin{cases}
+                    &1 + 2\lambda x_i = 0 \\
+                    &\sum \limits_i x_i^2 - 1 = 0
+                \end{cases}
+            \end{equation}
+        solve ~\eqref{eq:p2b}, we get:
+        \begin{equation}
+            \begin{cases}
+                &\lambda = \frac{\sqrt{n}}{2} \\
+                &x_i = \frac{-1}{\sqrt{n}}
+            \end{cases}
+        \end{equation}
+    }
+    \end{homeworkSection}
+%---------------------------------
+    \begin{homeworkSection}{(c)}
+    \problemAnswer{ % Answer
+        $$L(Q, \lambda) = \sum\limits_i \ln \left( \frac{P(i)}{Q(i)}\right) P(i)- 
+        \lambda\left(\sum\limits_i Q(i) - 1\right)$$
+        which is equivalent to
+            \begin{equation}
+                \begin{cases}
+                    &\frac{\partial L}{\partial Q(i)} = 0 \\
+                    &\sum\limits_i Q(i) - 1 = 0
+                \end{cases}
+            \end{equation}
+        which is equivalent to
+            \begin{equation}
+                \label{eq:p2c}
+                \begin{cases}
+                    &Q(i) = \frac{-P(i)}{\lambda} \\
+                    &\sum \limits_i Q(i) - 1 = 0
+                \end{cases}
+            \end{equation}
+        solve ~\eqref{eq:p2c}, we get:
+        \begin{equation}
+            \begin{cases}
+                &\lambda = -1 \\
+                &Q(i) = P(i)
+            \end{cases}
+        \end{equation}
+    }
+    \end{homeworkSection}
+%---------------------------------
+    \begin{homeworkSection}{(d)}
+    \problemAnswer{ % Answer
+        $$L(Q, \lambda) = -\sum\limits_k Q(k)\ln{Q(k)} + 
+        \lambda\left(\sum\limits_k Q(k) - 1\right)$$
+        which is equivalent to
+            \begin{equation}
+                \begin{cases}
+                    &\frac{\partial L}{\partial Q(k)} = 0 \\
+                    &\sum\limits_i Q(k) - 1 = 0
+                \end{cases}
+            \end{equation}
+        which is equivalent to
+            \begin{equation}
+                \label{eq:p2d}
+                \begin{cases}
+                    &Q(k) = e^{\lambda - 1} \\
+                    &\sum\limits_k Q(k) - 1 = 0
+                \end{cases}
+            \end{equation}
+
+        solve ~\eqref{eq:p2d}, we get:
+        \begin{equation}
+            \begin{cases}
+                &\lambda = 1 - \ln K \\
+                &Q(k) = \frac{1}{K} 
+            \end{cases}
+        \end{equation}
+    }
+    \end{homeworkSection}
+%%---------------------------------
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

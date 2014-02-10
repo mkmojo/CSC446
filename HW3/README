@@ -1,0 +1,61 @@
+Name: {Qiyuan Qiu}
+Email: {qqiu@cs.rochester.edu}
+Course: {CSC446}
+Homework: {Implement linear regression for the voting dataset using Python. Split the 435 examples into 348 train / 45 dev / 42 test and report your classification accuracy on the test set.}
+
+************ Files *********
+{
+    hw3.py      : The source
+    Makefile    : Makefile for this assignment
+    voting2.dat : Data used for this assignment
+    README      : This document
+}
+
+************ Algorithm *****
+{
+    Parse voting2.dat to get vector y and feature matrix X.
+    Train the model using normal equaiton. Get modle W. 
+    Verify the modle accuracy on dev set. Tune the parameter lam. 
+    Test W on test set.
+}
+
+************ Instructions ***
+{
+    At the same place of hw2.py, please type make.
+    The following result will show up:
+        [[-0.17719988]
+        [-0.07528204]
+        [ 0.01909786]
+        [-0.33751378]
+        [ 0.32652356]
+        [-0.1244219 ]
+        [ 0.09704044]
+        [ 0.05616291]
+        [-0.16227952]
+        [ 0.06095778]
+        [-0.16754543]
+        [ 0.18445769]
+        [-0.00312464]
+        [ 0.03583647]
+        [-0.06805278]
+        [-0.02754466]]
+        accuracy for dev set is : 0.822222222222 with lambda: 0
+        accuracy for test set is : 0.880952380952 with lambda: 0
+    The first part(from line 26 to 41) is the final parameters I got for linear model W. 
+    The second part(line 42) is the accuracy model W on dev set.
+    The third part(line 43) is the accuracy model W on test set.
+}
+
+************ Results *******
+{
+    Please seee the above section    
+}
+
+************ Your interpretation ****
+{
+    The result I get can be improved, because I tried randomly selecting tranning data, and the result is slightly better than what I have right now. However the behavior will be unstable in that case. 
+    Overall I belive that the data we are given right now is not enough, therefore the lamda here does not have a chance to be greater than 0. We are far away from over fitting the model.
+}
+
+************ References ************
+{Any external materials you used for the homework. Anyone you discussed with}

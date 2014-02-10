@@ -1,0 +1,414 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{mathtools}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Assignment\ \#1} % Assignment title
+\newcommand{\hmwkDueDate}{Wed,\ Jan.\ 21,\ 2014} % Due date
+\newcommand{\hmwkClass}{CSC\ 446} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Qiyuan Qiu} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+%\newpage
+%\tableofcontents
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}
+\vspace{10pt} % Question
+
+\problemAnswer{ % Answer
+
+$$E[XY] = \sum\limits_{x=-\infty}^{+\infty}\sum\limits_{y=-\infty}^{+\infty} xyp_{X,Y}(x, y)$$
+bacause $X$ and $Y$ are independent, 
+$$p_{X,Y}(x, y) = p_{X}(x) p_{Y}(y)$$
+therefore, 
+\begin{equation*}
+\begin{split}
+\sum\limits_{x=-\infty}^{+\infty}\sum\limits_{y=-\infty}^{+\infty} xyp_{X,Y}(x, y) &= \sum\limits_{x=-\infty}^{+\infty}\sum\limits_{y=-\infty}^{+\infty} xyp_{X}(x) p_{Y}(y) \\ 
+&= \sum\limits_{x=-\infty}^{+\infty}xp_{X}(x)\sum\limits_{y=-\infty}^{+\infty}yp_{Y}(y) \\
+& = E[X]E[Y]
+\end{split}
+\end{equation*}
+}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+
+\begin{homeworkProblem}
+\vspace{10pt} % Question
+
+\problemAnswer{ % Answer
+\begin{equation*}
+\begin{split}
+P(|X-\mu|^2 \ge k^2\sigma^2)
+ & = P((X-\mu)^2 \ge k^2\sigma^2) \\
+ & \le \frac{E[(X-\mu)^2]}{k^2\sigma^2} \\
+ & = \frac{\sigma^2}{k^2\sigma^2} \\
+ & = \frac{1}{k^2}
+\end{split}
+\end{equation*}
+}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+%--------------------------------------------
+\begin{homeworkSection}{(a)} % Section within problem
+\vspace{10pt} % Question
+
+\problemAnswer{ % Answer
+$$E[R] = E[r_1\cdot r_2 \cdot r_3 \cdot \ldots \cdot r_N]$$ 
+because $r_i$ is i.i.d, 
+\begin{equation}
+\label{eq:E_R}
+E[R] = (E[r_1])^N 
+\end{equation}
+\begin{equation*}
+\begin{split}
+E[r_1] &= \sum\limits_{x=-\infty}^{+\infty}xp_{X}(x) \\
+& = \frac{1}{2}\times \frac{1}{2} + 2 \times \frac{1}{2} \\
+& = \frac{5}{4}
+\end{split}
+\end{equation*}
+Therefore because of ~\eqref{eq:E_R}
+$$E[R] = \left(\frac{5}{4}\right)^N$$
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(b)} % Section within problem
+\problemAnswer{ % Answer
+$X$ could be seen as doing the same experiment for $N$ times. 
+Therefor the relationship between $X$ and $x_i$ should be similar to that between Binomial and Bernoulli. 
+\begin{equation*}
+\begin{split}
+E[x_1] &= \sum\limits_{x=-\infty}^{+\infty}xp_{X_{1}}(x) \\ 
+&= log\frac{1}{2} \times \frac{1}{2} + log2 \times \frac{1}{2} \\
+&=0
+\end{split}
+\end{equation*}
+Hence, 
+\begin{equation}
+\label{eq:E_X}
+E[X] = N \times E[x_1] = 0
+\end{equation}
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(c)} % Section within problem
+\problemAnswer{ % Answer
+$$Var[X_i] = Var[X_1] = E[X_1^2] - \left( E[X_1]\right)^2$$
+\begin{equation*}
+\begin{split}
+E[X_{1}^2]  &= \sum\limits_{x=-\infty}^{+\infty}x_1^2p_{X_{1}}(x) - \left( E[X_1]\right)^2 \\
+& = \left(log\frac{1}{2}\right)^2\times\frac{1}{2} + \left(log2\right)^2\times \frac{1}{2} \\
+& = log^2 2
+\end{split}
+\end{equation*}
+
+Because $E[X_1]$ = 0, so  
+$$Var[X_i] = E[X_{1}^2] =  log^2 2$$
+
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(d)} % Section within problem
+\problemAnswer{ % Answer
+Because $x_i$ are i.i.d. \\
+So, 
+$$Var[X] = NVar[X_1] = Nlog^2 2$$
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(e)} % Section within problem
+\problemAnswer{ % Answer
+We want to know
+$$P\left(X > \left(\frac{9}{8}\right)^N\right)$$
+We already know from ~\eqref{eq:E_X} that
+$$\mu = E[X] = 0$$
+$$P\left(X > \left(\frac{9}{8}\right)^N\right) = P\left(X-\mu > \left(\frac{9}{8}\right)^N\right)$$
+Because $X > 0$, $\mu = 0$ so $X-\mu$ = $|X-\mu|$
+So
+\begin{equation*}
+\begin{split}
+P\left(X > \left(\frac{9}{8}\right)^N\right)& = P\left(|X-\mu| > \left(\frac{9}{8}\right)^N\right) \\
+& \le \frac{E((X-\mu)^2)}{\left(\frac{9}{8}\right)^{2N}} \\
+& = \frac{Nlog^2 2}{\left(\frac{9}{8}\right)^{2N}} \\
+& = \lim_{N \to +\infty} \frac{Nlog^2 2}{\left(\frac{9}{8}\right)^{2N}}\\
+& = 0
+\end{split}
+\end{equation*}
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+\end{homeworkProblem}
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+%--------------------------------------------
+\begin{homeworkSection}{(a)} % Section within problem
+\problemAnswer{ % Answer
+$$ r_i 
+= \left\{
+\begin{array}{l l}
+    \frac{1}{4}& \quad \text{with prob $\frac{1}{4}$} \\
+    \frac{5}{4}& \quad \text{with prob $\frac{1}{2}$} \\
+    2 & \quad \text{with prob $\frac{1}{4}$} 
+\end{array} 
+\right.
+$$
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+\begin{homeworkSection}{(b)} % Section within problem
+\problemAnswer{ % Answer
+\begin{equation*}
+\begin{split}
+E[r_1] &= \sum\limits_{x = -\infty}^{+\infty}xp_X(r) \\
+& = \frac{1}{2} \times \frac{1}{4} + \frac{5}{4} \times \frac{1}{2} + 2 \times \frac{1}{4} \\
+& = \frac{5}{4}
+\end{split}
+\end{equation*}
+
+For similar reason as in problem \#3, 
+$$E[R] = \left(\frac{5}{4}\right)^N$$
+}
+\end{homeworkSection}
+%--------------------------------------------
+\begin{homeworkSection}{(c)} % Section within problem
+\problemAnswer{ % Answer
+\begin{equation*}
+\begin{split}
+E(x_1) &= log\left(\frac{1}{2}\right)\times\frac{1}{4} +  log\left(\frac{5}{4}\right)\times\frac{1}{2} +  log\left(2\right)\times\frac{1}{4} \\
+& = \frac{1}{2}log\left(\frac{5}{4}\right) 
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+E(X) &= N \times \frac{1}{2}log\left(\frac{5}{4}\right)\\
+& =  \frac{N}{2}log\left(\frac{5}{4}\right)
+\end{split}
+\end{equation*}
+}
+\end{homeworkSection}
+%--------------------------------------------
+\begin{homeworkSection}{(d)} % Section within problem
+\problemAnswer{ % Answer
+$$Var[X_i] = Var[X_1] = E[X_1^2] - \left(E[X_1]\right)^2$$
+
+\begin{equation*}
+\begin{split}
+E[X_1^2] &= \sum\limits_{x_1 = -\infty}^{+\infty}x_1^2p_{X_1}(x_1) \\
+& = log^2\left(\frac{1}{2}\right) \times \frac{1}{4} + log^2\left(\frac{5}{4}\right) \times \frac{1}{2} + log^2\left(2\right) \times \frac{1}{4}  \\
+& = \frac{1}{2}log^2\left(2\right) + \frac{1}{2}log^2\left(\frac{5}{4}\right) 
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+Var[X_i] &= \frac{1}{2}log^2\left(2\right) + \frac{1}{2}log^2\left(\frac{5}{4}\right) - 
+\left(\frac{1}{2}log\left(\frac{5}{4}\right)\right)^2 \\
+& = \frac{1}{2}log^2\left(2\right) + \frac{1}{4}log^2\left(\frac{5}{4}\right)
+\end{split}
+\end{equation*}
+}
+\end{homeworkSection}
+%--------------------------------------------
+\begin{homeworkSection}{(e)} % Section within problem
+\problemAnswer{ % Answer
+$$Var[X] = N\left( \frac{1}{2}log^2\left(2\right) + \frac{1}{4}log^2\left(\frac{5}{4}\right) \right) $$
+
+}
+\end{homeworkSection}
+%--------------------------------------------
+\begin{homeworkSection}{(f)} % Section within problem
+\problemAnswer{ % Answer
+$$ P\left(X < \left( \frac{9}{8} \right)^N\right)  = 1 - P\left(X \ge \left( \frac{9}{8} \right)^N\right) $$
+From the right hand side part, 
+\begin{equation*}
+\begin{split}
+P\left(X \ge \left( \frac{9}{8} \right)^N\right) &= P\left(|X - \mu|^2 \ge \left(\left(\frac{9}{8}\right)^N - \mu\right)^2\right) \\
+& \le \frac{E\left(|X - \mu|^2\right) = Var\left(X\right)}{\left( \left( \frac{9}{8} \right) - \mu \right)^2} \\
+& = \frac{N\left(\frac{1}{2}log^2\left(2\right) + \frac{1}{4}log^2\left(\frac{5}{4}\right)\right)}{\left(\left(\frac{9}{8}\right)^N - \frac{N}{2}log\left(\frac{5}{4}\right)\right)^2} \\
+& = \frac{\frac{1}{2}log^2\left(2\right) +\frac{1}{4}log^2\left(\frac{5}{4}\right)}{\frac{\left(\frac{9}{8}\right)^N}{N} + \frac{\frac{1}{4}log^2\left(\frac{5}{4}\right)}{\left(\frac{9}{8}\right)^N} - log^2\left(\frac{5}{4}\right)} 
+\end{split}
+\end{equation*}
+$$\lim_{N \to +\infty}\frac{\frac{1}{2}log^2\left(2\right) +\frac{1}{4}log^2\left(\frac{5}{4}\right)}{\frac{\left(\frac{9}{8}\right)^N}{N} + \frac{\frac{1}{4}log^2\left(\frac{5}{4}\right)}{\left(\frac{9}{8}\right)^N} - log^2\left(\frac{5}{4}\right)} = 0$$
+So when $N \rightarrow +\infty$ 
+$$P\left(X \ge \left( \frac{9}{8} \right)^N\right) = P\left(|X - \mu|^2 \ge \left(\left(\frac{9}{8}\right)^N - \mu\right)^2\right) = 0 $$
+So 
+$$ P\left(X < \left( \frac{9}{8} \right)^N\right) = 1$$
+}
+\end{homeworkSection}
+%--------------------------------------------
+\begin{homeworkSection}{(g)} % Section within problem
+\problemAnswer{ % Answer
+For these two methods, their $E[R]$ are the same.
+Bue the variance of problem \#4 is less than that of problem \#3. 
+\begin{equation*}
+\begin{split}
+ Nlog^22 - N\left(\frac{1}{2}log^22 + \frac{1}{4}log^2(\frac{5}{4})\right)
+& = \frac{N}{2}log^22 - \frac{N}{4}log^2(\frac{5}{4})\\
+& \ge \frac{N}{4}log^22 - \frac{N}{4}log^2(\frac{5}{4}) \\
+& > 0
+\end{split}
+\end{equation*}
+This means if we choose the second method, we are more likely to be close to expectation. 
+Therefore I will choose the latter one. 
+
+}
+\end{homeworkSection}
+%--------------------------------------------
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
