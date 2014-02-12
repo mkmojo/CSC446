@@ -24,7 +24,7 @@ dev / 42 test and report your classification accuracy on the test set.
         Repeat for 1000 times:
             Iterating through data points
                 if current prediction is wrong:
-                    W <-- W + err_contribution from current mistake (Equation 4.55, Bishop)
+                    W <-- W + cnt_err_contribution  (Equation 4.55, Bishop)
                 else:
                     W <-- W
                 Evaluate Ep
@@ -34,11 +34,13 @@ dev / 42 test and report your classification accuracy on the test set.
 
 ******** Instructions ********
 {
-    To run the homework, just type make.
+    to run the homework please type the following command:
+    make
 }
 
 ******** Results ********
 {
+    For 10,000 iterations,
     The final W for the perceptron model is: [[-6. -3.  1. -5.  4. -3.  5.  0. -9.  2. -7.  5.  0.  3. -4. -1.]]
 
     The final accuracy on test data set is:  0.880952380952
@@ -46,7 +48,14 @@ dev / 42 test and report your classification accuracy on the test set.
 
 ******** Interpretation ********
 {
-    The
+    Based on the result I got from experiments. The dataset we have is not linearly 
+    separatable. Therefore I ran 10,000 iterations to train the perceptron model.
+    As the result, the accuracy fluctuates if we chose different iterations.
+
+    Compared with linear regression, this method is easier to code. However, because 
+    the accuracy fluctuates and we have no idea if this model is just slow to converge
+    or it will never converge. 
+
 }
 
 ******** References ********

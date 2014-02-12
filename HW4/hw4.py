@@ -1,7 +1,7 @@
 #This can make sure that division / will not round to the nearest integer.
 from __future__ import division
 import numpy as np
-
+import sys
 # Input   : A list of strings
 # Output  : A list of numbers
 # Behavior: This function takes in feature vector like ['y','n','?'] and convert it into number vector like
@@ -64,7 +64,7 @@ def get_err(W, X, y):
         x_n = X[n]
         t_n = y[n]
         predict = get_prediction(W, x_n)
-        
+
         if predict != t_n:
             err_frac = get_err_fraction(W, x_n, t_n)
             err = err - err_frac
@@ -104,18 +104,27 @@ def train_perceptron(n_iter):
     #Augment the input data with ones col as the constant offset for linear model.
     X = np.c_[ np.ones(n_row), np.mat(fea)]
     W = np.c_[ np.ones(1) , np.zeros(n_col).reshape((1,n_col))]
+
+    W_best = W
+    E_min = get_err(W, X, y)
     i = 0
     while i <= n_iter:
-        #if i % 1000 == 0:
-        #   print i / n_iter * 100, "%"
+        if i %(n_iter / 20) == 0:
+           print i / n_iter * 100, "%"
         x_n = X[i%n_row]
         t_n = y[i%n_row]
-        
+
         if get_prediction(W, x_n) != t_n:
             W = (W.T + x_n.T * t_n).T
-        #E_cnt = get_err(W, X, y)
+
+        E_cnt = get_err(W, X, y)
+        if E_cnt < E_min:
+            E_min = E_cnt
+            W_best = W
+            #print W, E_min
+
         i = (i + 1)
-    return W
+    return W_best,W
 
 
 # Input     : W     --> Model used to make predictions.
@@ -127,17 +136,16 @@ def test(W):
     y = np.asarray(test_res)
     rows = len(test_fea)
     X = np.c_[ np.ones(rows), np.mat(test_fea)]
-    
+
     predicts = []
     for i, x_n in enumerate(X):
         predict = get_prediction(W,x_n)
         predicts.append(predict)
     predicts = np.asarray(predicts).reshape((rows,1))
-    
-    n_correct = np.sum(np.equal(predicts,y))
-    
-    return n_correct/len(predicts)
 
+    n_correct = np.sum(np.equal(predicts,y))
+
+    return n_correct/len(predicts), get_err(W, X, y)
 
 
 __author__ = 'qqy'
@@ -158,12 +166,16 @@ def main():
     parse_data()
     print "Parse Data ..."
     print "Training ... "
-    
-    W_final = train_perceptron(10000)
-    print "The final model is:", W_final
-    
-    accu = test(W_final)
-    print "Accuracy on test set is :", accu
+
+    W_best, W_last = train_perceptron(int(sys.argv[1]))
+    print "The best model is:", W_best
+    print "The last model is:", W_last
+
+    accu_W_best, Err_W_best = test(W_best)
+    accu_W_last, Err_W_last = test(W_last)
+    print "Accuracy on test set is, best model :", accu_W_best, "with err:", Err_W_best
+    print "Accuracy on test set is, last model :", accu_W_last, "with err:", Err_W_last
+
 
 if __name__ == "__main__":
     main()

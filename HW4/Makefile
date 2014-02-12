@@ -1,2 +1,2 @@
 all:
-	python hw4.py
+	python hw4.py 300
