@@ -1,22 +1,13 @@
 #This can make sure that division / will not round to the nearest integer.
 from __future__ import division
+import numpy as np
 
 __author__ = 'qqiu'
 
 # This is global dict used for converting strings to numbers.
-# so that the perceptron can work with the string data.
+# so that the svm can work with the string data.
 encode = {'y':1, 'n':-1, '?':0, 'republican':1, 'democrat':-1}
 
-data = []       #input data set
-res = []        #training set
-fea = []        #training set
-dev_res = []    #developing set
-dev_fea = []    #developing set
-test_res = []   #test set
-test_fea = []   #test set
-
-import numpy as np
-import sys
 # Input   : A list of strings
 # Output  : A list of numbers
 # Behavior: This function takes in feature vector like ['y','n','?'] and convert it into number vector like
@@ -31,28 +22,47 @@ def convert_to_number(inlist):
 # Input     : void
 # Output    : lists res[], fea[], dev_res[], dev_fea[], test_res[], test_fea[].
 # Behavior  : This function loads in data from voting2.dat to the lists listed in the above Output section
-def parse_data():
+def parse_data(filename):
     #parse data, convert strings into numbers.
-    lines = open('voting2.dat','r')
-    for i, line in enumerate(lines):
-        line = line.split()
-        line = line[0].split(',')
-        #348 data points for training
-        if i > 16 and i <= 16 + 348:
-            res.append( convert_to_number(line[0].split()) )
-            fea.append( convert_to_number(line[1:]) )
-        #45 data points for developing
-        elif i > 16 + 348 and i <= 16 + 348 + 45:
-            dev_res.append( convert_to_number(line[0].split()) )
-            dev_fea.append( convert_to_number(line[1:]) )
-        #42 data points for testing
-        elif i > 16 + 348 + 45:
-            test_res.append( convert_to_number(line[0].split()) )
-            test_fea.append( convert_to_number(line[1:]) )
+    lines = open(filename,'r')
 
-# Input     : Number of iterations used to train the perceptron model
-# Output    : W representing the perceptron model.
-# Behavior  : This function trans the perceptron model. It iterates through the data points in data set X.
+    X = []
+    y = []
+    for i, line in enumerate(lines):
+        if i > 16:
+            line = line.split()
+            line = line[0].split(',')
+            y.append( convert_to_number(line[0].split()) )
+            X.append( convert_to_number(line[1:]) )
+
+    print "Shuffle Input Data ..."
+    X = np.asmatrix(X)
+    y = np.asarray(y)
+    m = X.shape[0]
+    rand_indices = np.random.permutation(m)
+    X = X[rand_indices[:]]
+    y = y[rand_indices[:]]
+
+
+    print "Get Training Set ..."
+    #348 data points for training
+    fea = X[0:348]
+    res = y[0:348]
+
+    print "Get Dev Set ..."
+    #45 data points for developing
+    dev_fea = X[348:348+45]
+    dev_res = y[348:348+45]
+
+    print "Get Test Set ..."
+    #42 data points for testing
+    test_fea = X[348+45:348+45 + 42]
+    test_res = y[348+45:348+45 + 42]
+    return fea,res, dev_fea, dev_res, test_fea, test_res
+
+# Input     : Number of iterations used to train the svm model
+# Output    : W representing the svm model.
+# Behavior  : This function trans the svm model. It iterates through the data points in data set X.
 #             Then updates the W if any mismatch happens.
 def train_svm(X, y, n_iter, constant, C):
     X = np.asmatrix(X)
@@ -83,6 +93,12 @@ def train_svm(X, y, n_iter, constant, C):
                 W = W - learning_rate * (1/N * W)
     return W
 
+# Input     : W     --> Model used to make predictions.
+#             X     --> Features
+#             y     --> Labels
+# Output    : accu  --> Accuracy on given dataset X.
+# Behavior  : This function takes in a SVM model W and make predictions based on the model. Outputs the final
+#             accuracy on the test set.
 def test_svm(W, X, y):
     X = np.asmatrix(X)
     y = np.asarray(y)
@@ -95,43 +111,47 @@ def test_svm(W, X, y):
     return accu, num_mistake
 
 def main():
-    parse_data()
-    print "Parse Data ..."
-    print "Training ... "
-    #n_iter = int(sys.argv[0])
-    #constant = int(sys.argv[1])
-    #C = int(sys.argv[2])
+    accu_final = 0
+    for exp in xrange(3):
+        print "Experiment: ", exp + 1
+        print "Parse Data ..."
+        fea, res, dev_fea, dev_res, test_fea, test_res = parse_data('voting2.dat')
 
-    n_iters =  [2, 5, 8, 10, 12, 15]
-    constants =  [0.2, 0.4, 0.8, 1]
-    Cs = [0.03, 0.3, 3, 10, 20, 30, 50, 70, 90, 120, 150, 180]
-    accu_max = 0
-    for id_iter, n_iter in enumerate( n_iters ):
-        for id_constant, constant in enumerate(constants):
-            for id_C, C in enumerate(Cs):
-                #print id_iter, id_constant, id_C
-                num_tot_exps = len(n_iters) * len(constants) * len(Cs)
-                num_cnt_exps = (id_iter) * len(constants) * len(Cs) + (id_constant) * len(Cs) + (id_C) + 1
-                print "%.2f" % (num_cnt_exps / num_tot_exps * 100), "%"
-                W = train_svm(fea, res, int(n_iter), float(constant), float(C))
+        print "Training ... "
+        n_iters =  [2, 5, 8, 10, 12, 15]
+        constants =  [0.2, 0.4, 0.8, 1]
+        Cs = [0.03, 0.3, 3, 10, 20, 30, 50, 70, 90, 120, 150, 180]
+        accu_max = 0
+        for id_iter, n_iter in enumerate( n_iters ):
+            for id_constant, constant in enumerate(constants):
+                for id_C, C in enumerate(Cs):
+                    num_tot_exps = len(n_iters) * len(constants) * len(Cs)
+                    num_cnt_exps = (id_iter) * len(constants) * len(Cs) + (id_constant) * len(Cs) + (id_C) + 1
+                    if num_cnt_exps % int(num_tot_exps/10) == 0:
+                        print "%.2f" % (num_cnt_exps / num_tot_exps * 100), "%"
+                    W = train_svm(fea, res, int(n_iter), float(constant), float(C))
 
-                accu = test_svm(W, dev_fea, dev_res)
-                #print "Accuracy on dev set is:", accu
-                if accu > accu_max:
-                    n_iter_best = n_iter
-                    constant_best = constant
-                    C_best = C
-                    accu_max = accu
-                    W_best = W
-    print "Best result on dev set acquired with: n_iter = ", n_iter_best, "constant = ", constant_best, "C = ", C_best
-    accu0, num_mistake0 = test_svm(W_best, dev_fea, dev_res)
-    print "Number of mistakes      :", num_mistake0
-    print "Accuracy                :%.2f" % accu0, "%"
+                    accu = test_svm(W, dev_fea, dev_res)
+                    if accu > accu_max:
+                        n_iter_best = n_iter
+                        constant_best = constant
+                        C_best = C
+                        accu_max = accu
+                        W_best = W
+        print "Best result on dev set achieved with: n_iter = ", n_iter_best, "constant = ", constant_best, "C = ", C_best
+        accu0, num_mistake0 = test_svm(W_best, dev_fea, dev_res)
+        print "Number of mistakes      :", num_mistake0
+        print "Accuracy                :%.2f" % (accu0*100), "%"
 
-    print "Result on test set:"
-    accu1, num_mistake1 = test_svm(W_best, test_fea, test_res)
+        if accu0 > accu_final:
+            accu_final = accu0
+            W_final = W_best
+            exp_final = exp + 1
+
+    print "\nResult on test set with the W from exp :", exp_final
+    accu1, num_mistake1 = test_svm(W_final, test_fea, test_res)
     print "Number of mistakes      :", num_mistake1
-    print "Accuracy                :%.2f" % accu1, "%"
+    print "Accuracy                :%.2f" % (accu1*100), "%"
 
 if __name__ == "__main__":
     main()
