@@ -119,7 +119,7 @@ def test_svm(W, X, y):
 
 def main():
     accu_final = 0
-    for exp in xrange(3):
+    for exp in xrange(5):
         print "Experiment: ", exp + 1
         print "Parse Data ..."
         fea, res, dev_fea, dev_res, test_fea, test_res = parse_data('voting2.dat')

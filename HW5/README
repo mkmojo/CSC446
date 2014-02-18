@@ -18,12 +18,12 @@ Homework:
 
 ******** Algorithm ********
 {
-    Repeat for 3 times:
+    Repeat for 5 times:
         Parse and shuffle data
         Picking number of iterations, learning rate and C to train the model:
             W = train_svm_model
         Test the result using W on dev set
-    Use the best W from above 3 experiments as the model for the test on test set.
+    Use the best W from above 5 experiments as the model for the test on test set.
     Output result on test set
 }
 
