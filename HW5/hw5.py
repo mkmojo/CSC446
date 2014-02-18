@@ -81,17 +81,21 @@ def train_svm(X, y, n_iter, constant, C):
     W = np.zeros(n + 1).reshape(n+1, 1)
 
 
+    W_ = W[1:]
+    b = W[0].reshape((1,1))
     for t in xrange(n_iter):
         learning_rate = constant/(t+1)
         for i in xrange(N):
-            x_i = X[i]
+            x_i_ = X[i,1:]
             y_i = y[i].item((0, 0)) # make y_i from one element mat to scalar
 
-            if 1 - y_i * x_i * W  > 0:
-                W = W - learning_rate * (1/N * W - C * y_i * x_i.T)
+            if 1 - y_i * (x_i_ * W_ + b) > 0:
+                W_ = W_- learning_rate * (1/N * W_ - C * y_i * x_i_.T)
+                b = b + learning_rate * C * y_i
             else:
-                W = W - learning_rate * (1/N * W)
-    return W
+                W_ = W_ - learning_rate * (1/N * W_)
+                #b = b
+    return np.r_[b, W_]
 
 # Input     : W     --> Model used to make predictions.
 #             X     --> Features
