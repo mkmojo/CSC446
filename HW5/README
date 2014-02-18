@@ -1,30 +1,54 @@
 Name:   {Qiyuan Qiu}
 Email:  {qqiu@cs.rochester.edu}
 Course: {CSC446}
-Homework: {
-
+Homework: 
+{
+    Implement SVMs with SGD for the voting dataset, and compare results with 
+    the previous assignment. Use the dev set to experiment with different values
+    of the capacity parameter C and the learning rate.
 }
 
 ******** Files ********
 {
+    hw5.py      : Source code for this assignment.
+    Makefile    : Makefile for this assignment.
+    Voting2.dat : Voting data used for svm training.
+    README      : This document.
 }
 
 ******** Algorithm ********
 {
+    Repeat for 3 times:
+        Parse and shuffle data
+        Picking number of iterations, learning rate and C to train the model:
+            W = train_svm_model
+        Test the result using W on dev set
+    Use the best W from above 3 experiments as the model for the test on test set.
+    Output result on test set
 }
 
 ******** Instructions ********
 {
+    To use this package simply type:
+    make
 }
 
 ******** Results ********
 {
+    Because of the randomness involved, this algorithm has random results. 
+    However, the final accuracy on test set are usually higher than 90%.
 }
 
 ******** Interpretation ********
 {
+    Compared with the previous perceptron algorithm. SVM is similar to it in a sense
+    that it's update has perceptron as a part. The difference lies in that in 
+    in addition to the perceptron part, SVM also includes a margin in the update
+    equation. This allows some room for outliar points which leads to more robust 
+    classification performance.
 }
 
 ******** References ********
 {
+    Pattern Recognition and Machine Learning, Christopher M. Bishop
 }

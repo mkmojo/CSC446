@@ -81,6 +81,9 @@ def train_svm(X, y, n_iter, constant, C):
     W = np.zeros(n + 1).reshape(n+1, 1)
 
 
+    #!!! Important !!!
+    #Tear W apart for the update rule resulting from gradient descent is different for
+    #The coefficients of X and that of bias b
     W_ = W[1:]
     b = W[0].reshape((1,1))
     for t in xrange(n_iter):
@@ -142,7 +145,7 @@ def main():
                         C_best = C
                         accu_max = accu
                         W_best = W
-        print "Best result on dev set achieved with: n_iter = ", n_iter_best, "constant = ", constant_best, "C = ", C_best
+        print "Test result on dev set with: n_iter = ", n_iter_best, "constant = ", constant_best, "C = ", C_best
         accu0, num_mistake0 = test_svm(W_best, dev_fea, dev_res)
         print "Number of mistakes      :", num_mistake0
         print "Accuracy                :%.2f" % (accu0*100), "%"
@@ -151,7 +154,7 @@ def main():
             accu_final = accu0
             W_final = W_best
             exp_final = exp + 1
-
+    #Output the final choice of W and the corresponding accuracy
     print "\nResult on test set with the W from exp :", exp_final
     accu1, num_mistake1 = test_svm(W_final, test_fea, test_res)
     print "Number of mistakes      :", num_mistake1
