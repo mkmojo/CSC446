@@ -125,9 +125,9 @@ def main():
         fea, res, dev_fea, dev_res, test_fea, test_res = parse_data('voting2.dat')
 
         print "Training ... "
-        n_iters =  [2, 5, 8, 10, 12, 15]
-        constants =  [0.2, 0.4, 0.8, 1]
-        Cs = [0.03, 0.3, 3, 10, 20, 30, 50, 70, 90, 120, 150, 180]
+        n_iters =  [1, 2, 3, 5, 10]
+        constants =  [0.1, 0.2, 0.4, 0.8, 1]
+        Cs = [0.03, 0.3, 1, 3]
         accu_max = 0
         for id_iter, n_iter in enumerate( n_iters ):
             for id_constant, constant in enumerate(constants):

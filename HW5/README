@@ -36,7 +36,7 @@ Homework:
 ******** Results ********
 {
     Because of the randomness involved, this algorithm has random results. 
-    However, the final accuracy on test set are usually higher than 90%.
+    However, the final accuracy on test set are usually higher than 93%.
 }
 
 ******** Interpretation ********
